@@ -1,0 +1,201 @@
+/* Global Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #55ff00, #00fffb, #0800fb, #c300ff);
+    background-size: 400% 400%;
+    color: #fff;
+    scroll-behavior: smooth;
+    transition: background 0.5s, color 0.5s;
+    display: none;
+    /* Hide the main content by default */
+    animation: backgroundAnimation 15s ease infinite;
+    /* Animated background */
+    font-size: 16px;
+    /* Set base font size */
+    line-height: 1.6;
+    /* Set line height for better readability */
+}
+
+/* Text Styles for Headings */
+h1 {
+    font-size: 3rem;
+    /* Large font size */
+    font-weight: 900;
+    /* Bold weight for emphasis */
+    color: #00ffcc;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 2.5rem;
+    /* Slightly smaller than h1 */
+    font-weight: 700;
+    color: #00ff95;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+    margin-bottom: 15px;
+}
+
+/* Text Styles for Paragraphs */
+p {
+    font-size: 1.125rem;
+    /* Slightly larger than the base font size for better readability */
+    font-weight: 300;
+    /* Lighter weight for paragraphs */
+    color: #e0e0e0;
+    margin-bottom: 1.5rem;
+    /* Space between paragraphs */
+}
+
+/* Text Styles for Links */
+a {
+    font-weight: 500;
+    /* Medium weight for links */
+    color: #00ff95;
+    transition: color 0.3s ease;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #fff5a5;
+    /* Change color on hover */
+    text-shadow: 1px 1px 5px rgba(255, 245, 165, 0.8);
+    /* Add a slight glow on hover */
+}
+
+/* Text Styles for Lists */
+ul {
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+ul li {
+    margin-bottom: 0.75rem;
+    font-weight: 400;
+}
+
+/* Loader Styles */
+.loader {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 1);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader span {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin: 5px;
+    border-radius: 50%;
+    background: #00c6ff;
+    animation: bounce 0.6s infinite alternate;
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-15px);
+    }
+}
+
+/* Header Animation */
+header {
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Project Card Styles */
+.card {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: #202020;
+    color: #ffffff;
+    transition: transform 0.3s, box-shadow 0.3s, background-color 1s, border-color 1s ease-in-out;
+    opacity: 0;
+    animation: slideIn 0.5s forwards;
+    transform: translateY(20px);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgb(0, 0, 0, 0.5);
+    overflow: hidden;
+    position: relative;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* Highlight Border and Background on Hover */
+.card:hover {
+    border-color: #00ff95;
+    /* Smoothly highlight the border */
+    background: linear-gradient(135deg, #2a2a2a, #282828, #3b3b3b);
+    /* Gradient background color for a subtle effect */
+    box-shadow: 0 0 15px rgba(0, 255, 149, 0.8);
+    /* Subtle glow around the border */
+    transform: translateY(0);
+    /* No movement */
+    transition: background 1.2s ease, border-color 1s ease, box-shadow 1s ease;
+    /* Slower and smoother transition for the background, border, and shadow */
+}
+
+/* Edge glow effect on hover */
+.card:hover:before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 12px;
+    z-index: -1;
+    opacity: 0.5;
+    filter: blur(10px);
+    /* Soft glow around the border */
+    transition: opacity 1s ease, filter 1s ease;
+}
+
+/* Animations */
+@keyframes slideIn {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes backgroundAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Section Animations */
+.fade-in {
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+}
