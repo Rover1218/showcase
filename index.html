@@ -6,278 +6,409 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rover's Projects</title>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Font Awesome for icons -->
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/x-icon" href="/images/icon-favicon-19.jpg">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
-    <!-- AOS CSS for scroll animations -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="icon" href="./images/icon-favicon-19.jpg" type="image/png">
+    <style>
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="./css/styles.css">
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .animate-gradient {
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+
+        .card-hover {
+            transition: all 0.3s ease-in-out;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .loader {
+            width: 48px;
+            height: 48px;
+            border: 5px solid #FFF;
+            border-bottom-color: #FF3D00;
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+        }
+
+        @keyframes rotation {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
 </head>
 
-<body>
-    <!-- Loader -->
-    <div class="loader">
-        <span></span>
-        <span></span>
-        <span></span>
+<body class="animate-gradient min-h-screen">
+    <!-- Loading Spinner -->
+    <div id="loader" class="fixed inset-0 flex items-center justify-center bg-white z-50">
+        <span class="loader"></span>
     </div>
 
-    <!-- Header -->
-    <header id="home" class="text-center py-5">
-        <div class="container">
-            <h1 class="display-4">My Projects</h1>
-        </div>
-    </header>
-
     <!-- Main Content -->
-    <main>
-        <!-- Projects Section -->
-        <section id="projects" class="py-5">
-            <div class="container">
-                <div id="project-list" class="row">
-                    <!-- Sample project entries -->
-                    <div class="col-md-6 col-lg-4 mb-4">
-                        <div class="card h-100 fade-in" data-aos="fade-up">
-                            <div class="card-body text-center">
-                                <img src="./images/train.png" alt="Task Management Icon" class="project-icon mb-3"
-                                    style="width: 50px; height: 50px; object-fit: contain;" />
-                                <h5 class="card-title">Traingauge</h5>
-                                <p class="card-text">A web application for 3D Station and other facilites</p>
-                                <div class="mb-3">
-                                    <span class="badge bg-secondary me-1">HTML</span>
-                                    <span class="badge bg-secondary me-1">CSS</span>
-                                    <span class="badge bg-secondary me-1">JavaScript</span>
-                                    <span class="badge bg-secondary me-1">Firebase</span>
-                                    <span class="badge bg-secondary me-1">MongoDB</span>
-                                    <span class="badge bg-secondary me-1">Express.js</span>
-                                    <span class="badge bg-secondary me-1">Node.js</span>
-                                </div>
-                                <button class="btn btn-primary me-2" disabled>
-                                    <i class="fab fa-github"></i> Pvt. GitHub
-                                </button>
-                                <a href="https://app-sage-psi.vercel.app/user_login.html" target="_blank"
-                                    rel="noopener noreferrer" class="btn btn-primary">
-                                    <i class="fas fa-external-link-alt"></i> Live Demo
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+    <div id="content" class="hidden min-h-screen">
+        <!-- Header -->
+        <header class="text-center py-16 relative overflow-hidden">
+            <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+            <div class="relative z-10">
+                <h1 class="text-5xl font-bold text-white mb-4">My Projects</h1>
+                <p class="text-xl text-gray-200">A collection of my creative work and technical projects</p>
+            </div>
+        </header>
 
-                    <div class="col-md-6 col-lg-4 mb-4">
-                        <div class="card h-100 fade-in" data-aos="fade-up">
-                            <div class="card-body text-center">
-                                <img src="./images/8187860.png" alt="Task Management Icon" class="project-icon mb-3"
-                                    style="width: 50px; height: 50px; object-fit: contain;" />
-                                <h5 class="card-title">Learnsphere</h5>
-                                <p class="card-text">A web site for youtube playlist and book name for better use.</p>
-                                <div class="mb-3">
-                                    <span class="badge bg-secondary me-1">HTML</span>
-                                    <span class="badge bg-secondary me-1">CSS</span>
-                                    <span class="badge bg-secondary me-1">Javascript</span>
-                                </div>
-                                <a href="https://github.com/Rover1218/edu-site" target="_blank"
-                                    rel="noopener noreferrer" class="btn btn-outline-primary me-2">
-                                    <i class="fab fa-github"></i> GitHub
-                                </a>
-                                <a href="https://edu-site-lovat.vercel.app/" target="_blank" rel="noopener noreferrer"
-                                    class="btn btn-primary">
-                                    <i class="fas fa-external-link-alt"></i> Live Demo
-                                </a>
-                            </div>
+        <!-- Projects Grid -->
+        <main class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Traingauge -->
+                <div class="card-hover bg-white rounded-xl shadow-lg overflow-hidden fade-in-up">
+                    <div class="p-6">
+                        <div class="flex justify-center mb-4">
+                            <img src="./images/train.png" alt="Traingauge" class="w-16 h-16 object-contain floating">
                         </div>
-                    </div>
+                        <h3 class="text-xl font-semibold text-center mb-3">Traingauge</h3>
+                        <p class="text-gray-600 text-center mb-4">A web application for 3D Station and other facilities
+                        </p>
 
-                    <div class="col-md-6 col-lg-4 mb-4">
-                        <div class="card h-100 fade-in" data-aos="fade-up">
-                            <div class="card-body text-center">
-                                <img src="./images/fill-out-a-request-form-enrollment-school-ico-11563355189ognrnwshi9.png"
-                                    alt="Task Management Icon" class="project-icon mb-3"
-                                    style="width: 50px; height: 50px; object-fit: contain;" />
-                                <h5 class="card-title">Leave Application</h5>
-                                <p class="card-text">A web site to apply leave.
-                                </p>
-                                <div class="mb-3">
-                                    <span class="badge bg-secondary me-1">EJS</span>
-                                    <span class="badge bg-secondary me-1">CSS</span>
-                                    <span class="badge bg-secondary me-1">Firebase</span>
-                                    <span class="badge bg-secondary me-1">MongoDB</span>
-                                    <span class="badge bg-secondary me-1">Express.js</span>
-                                    <span class="badge bg-secondary me-1">Node.js</span>
-                                </div>
-                                <button class="btn btn-primary me-2" disabled>
-                                    <i class="fab fa-github"></i> Pvt. GitHub
-                                </button>
-                                <button class="btn btn-primary me-2" disabled>
-                                    <i class="fab fa-github"></i> Live Demo
-                                </button>
-                            </div>
+                        <div class="flex flex-wrap justify-center gap-2 mb-4">
+                            <span class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full">HTML</span>
+                            <span class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full">CSS</span>
+                            <span class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full">JavaScript</span>
+                            <span class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full">Firebase</span>
+                            <span class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full">MongoDB</span>
+                        </div>
+
+                        <div class="flex justify-center space-x-4">
+                            <button disabled
+                                class="opacity-50 transform hover:scale-105 transition-transform duration-200 inline-flex items-center px-4 py-2 bg-gray-900 text-white rounded-lg">
+                                <i class="fab fa-github mr-2"></i>Pvt. GitHub
+                            </button>
+                            <a href="https://app-sage-psi.vercel.app/user_login.html" target="_blank"
+                                class="transform hover:scale-105 transition-transform duration-200 inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg">
+                                <i class="fas fa-external-link-alt mr-2"></i>Live Demo
+                            </a>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-4 mb-4">
-                        <div class="card h-100 fade-in" data-aos="fade-up">
-                            <div class="card-body text-center">
-                                <img src="./images/favicon.ico" alt="Task Management Icon" class="project-icon mb-3"
-                                    style="width: 50px; height: 50px; object-fit: contain;" />
-                                <h5 class="card-title">Blog Site</h5>
-                                <p class="card-text">A web site to post blog and view others.</p>
-                                <div class="mb-3">
-                                    <span class="badge bg-secondary me-1">EJS</span>
-                                    <span class="badge bg-secondary me-1">CSS</span>
-                                    <span class="badge bg-secondary me-1">MongoDB</span>
-                                    <span class="badge bg-secondary me-1">Express.js</span>
-                                    <span class="badge bg-secondary me-1">Node.js</span>
-                                </div>
-                                <a href="https://github.com/Rover1218/blog-site" target="_blank"
-                                    rel="noopener noreferrer" class="btn btn-outline-primary me-2">
-                                    <i class="fab fa-github"></i> GitHub
-                                </a>
-                                <a href="https://blog-site-9u4h.onrender.com/" target="_blank" rel="noopener noreferrer"
-                                    class="btn btn-primary">
-                                    <i class="fas fa-external-link-alt"></i> Live Demo
-                                </a>
-                            </div>
+                </div>
+
+                <!-- Learnsphere -->
+                <div class="card-hover bg-white rounded-xl shadow-lg overflow-hidden fade-in-up">
+                    <div class="p-6">
+                        <div class="flex justify-center mb-4">
+                            <img src="./images/8187860.png" alt="Learnsphere" class="w-16 h-16 object-contain floating">
+                        </div>
+                        <h3 class="text-xl font-semibold text-center mb-3">Learnsphere</h3>
+                        <p class="text-gray-600 text-center mb-4">A website for youtube playlist and book name for
+                            better use</p>
+
+                        <div class="flex flex-wrap justify-center gap-2 mb-4">
+                            <span class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full">HTML</span>
+                            <span class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full">CSS</span>
+                            <span class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full">JavaScript</span>
+                        </div>
+
+                        <div class="flex justify-center space-x-4">
+                            <a href="https://github.com/Rover1218/edu-site" target="_blank"
+                                class="transform hover:scale-105 transition-transform duration-200 inline-flex items-center px-4 py-2 bg-gray-900 text-white rounded-lg">
+                                <i class="fab fa-github mr-2"></i>GitHub
+                            </a>
+                            <a href="https://edu-site-lovat.vercel.app/" target="_blank"
+                                class="transform hover:scale-105 transition-transform duration-200 inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg">
+                                <i class="fas fa-external-link-alt mr-2"></i>Live Demo
+                            </a>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-4 mb-4">
-                        <div class="card h-100 fade-in" data-aos="fade-up">
-                            <div class="card-body text-center">
-                                <img src="./images/Weather-icon.png" alt="Task Management Icon"
-                                    class="project-icon mb-3" style="width: 50px; height: 50px; object-fit: contain;" />
-                                <h5 class="card-title">Weather App</h5>
-                                <p class="card-text">A web site to view current location and other locations weather</p>
-                                <div class="mb-3">
-                                    <span class="badge bg-secondary me-1">HTML</span>
-                                    <span class="badge bg-secondary me-1">CSS</span>
-                                    <span class="badge bg-secondary me-1">JavaScript</span>
-                                </div>
-                                <a href="https://github.com/Rover1218/weather-app" target="_blank"
-                                    rel="noopener noreferrer" class="btn btn-outline-primary me-2">
-                                    <i class="fab fa-github"></i> GitHub
-                                </a>
-                                <a href="https://weather-app-omega-ashy-51.vercel.app/" target="_blank"
-                                    rel="noopener noreferrer" class="btn btn-primary">
-                                    <i class="fas fa-external-link-alt"></i> Live Demo
-                                </a>
-                            </div>
+                </div>
+
+                <!-- Leave Application -->
+                <div class="card-hover bg-white rounded-xl shadow-lg overflow-hidden fade-in-up">
+                    <div class="p-6">
+                        <div class="flex justify-center mb-4">
+                            <img src="./images/favicon.png" alt="Leave Application"
+                                class="w-16 h-16 object-contain floating">
+                        </div>
+                        <h3 class="text-xl font-semibold text-center mb-3">Leave Application</h3>
+                        <p class="text-gray-600 text-center mb-4">A website to apply leave</p>
+
+                        <div class="flex flex-wrap justify-center gap-2 mb-4">
+                            <span class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full">EJS</span>
+                            <span class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full">CSS</span>
+                            <span class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full">Firebase</span>
+                            <span class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full">MongoDB</span>
+                        </div>
+
+                        <div class="flex justify-center space-x-4">
+                            <button disabled
+                                class="opacity-50 transform hover:scale-105 transition-transform duration-200 inline-flex items-center px-4 py-2 bg-gray-900 text-white rounded-lg">
+                                <i class="fab fa-github mr-2"></i>Pvt. GitHub
+                            </button>
+                            <button disabled
+                                class="opacity-50 transform hover:scale-105 transition-transform duration-200 inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg">
+                                <i class="fas fa-external-link-alt mr-2"></i>Live Demo
+                            </button>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-4 mb-4">
-                        <div class="card h-100 fade-in" data-aos="fade-up">
-                            <div class="card-body text-center">
-                                <img src="./images/9813851.png" alt="Task Management Icon" class="project-icon mb-3"
-                                    style="width: 50px; height: 50px; object-fit: contain;" />
-                                <h5 class="card-title">Invoice Builder</h5>
-                                <p class="card-text">A web site to build invoice and download it.</p>
-                                <div class="mb-3">
-                                    <span class="badge bg-secondary me-1">HTML</span>
-                                </div>
-                                <a href="https://github.com/Rover1218/invoice-builder" target="_blank"
-                                    rel="noopener noreferrer" class="btn btn-outline-primary me-2">
-                                    <i class="fab fa-github"></i> GitHub
-                                </a>
-                                <a href="https://invoice-builder-sigma.vercel.app/" target="_blank"
-                                    rel="noopener noreferrer" class="btn btn-primary">
-                                    <i class="fas fa-external-link-alt"></i> Live Demo
-                                </a>
-                            </div>
+                </div>
+
+                <!-- Blog Site -->
+                <div class="card-hover bg-white rounded-xl shadow-lg overflow-hidden fade-in-up">
+                    <div class="p-6">
+                        <div class="flex justify-center mb-4">
+                            <img src="./images/favicon.ico" alt="Blog Site" class="w-16 h-16 object-contain floating">
+                        </div>
+                        <h3 class="text-xl font-semibold text-center mb-3">Blog Site</h3>
+                        <p class="text-gray-600 text-center mb-4">A website to post blog and view others</p>
+
+                        <div class="flex flex-wrap justify-center gap-2 mb-4">
+                            <span class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full">EJS</span>
+                            <span class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full">CSS</span>
+                            <span class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full">MongoDB</span>
+                        </div>
+
+                        <div class="flex justify-center space-x-4">
+                            <a href="https://github.com/Rover1218/blog-site" target="_blank"
+                                class="transform hover:scale-105 transition-transform duration-200 inline-flex items-center px-4 py-2 bg-gray-900 text-white rounded-lg">
+                                <i class="fab fa-github mr-2"></i>GitHub
+                            </a>
+                            <a href="https://blog-site-9u4h.onrender.com/" target="_blank"
+                                class="transform hover:scale-105 transition-transform duration-200 inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg">
+                                <i class="fas fa-external-link-alt mr-2"></i>Live Demo
+                            </a>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-4 mb-4">
-                        <div class="card h-100 fade-in" data-aos="fade-up">
-                            <div class="card-body text-center">
-                                <img src="./images/6361475.png" alt="Task Management Icon" class="project-icon mb-3"
-                                    style="width: 50px; height: 50px; object-fit: contain;" />
-                                <h5 class="card-title">Portfolio</h5>
-                                <p class="card-text">Personal Portfolio</p>
-                                <div class="mb-3">
-                                    <span class="badge bg-secondary me-1">HTML</span>
-                                    <span class="badge bg-secondary me-1">CSS</span>
-                                    <span class="badge bg-secondary me-1">SCSS</span>
-                                    <span class="badge bg-secondary me-1">JavaScript</span>
-                                </div>
-                                <button class="btn btn-primary me-2" disabled>
-                                    <i class="fab fa-github"></i> Pvt. GitHub
-                                </button>
-                                <a href="https://anindya-portfolio.vercel.app/" target="_blank"
-                                    rel="noopener noreferrer" class="btn btn-primary">
-                                    <i class="fas fa-external-link-alt"></i> Live Demo
-                                </a>
-                            </div>
+                </div>
+
+                <!-- Weather App -->
+                <div class="card-hover bg-white rounded-xl shadow-lg overflow-hidden fade-in-up">
+                    <div class="p-6">
+                        <div class="flex justify-center mb-4">
+                            <img src="./images/Weather-icon.png" alt="Weather App"
+                                class="w-16 h-16 object-contain floating">
+                        </div>
+                        <h3 class="text-xl font-semibold text-center mb-3">Weather App</h3>
+                        <p class="text-gray-600 text-center mb-4">A website to view current location and other locations
+                            weather</p>
+
+                        <div class="flex flex-wrap justify-center gap-2 mb-4">
+                            <span class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full">HTML</span>
+                            <span class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full">CSS</span>
+                            <span class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full">JavaScript</span>
+                        </div>
+
+                        <div class="flex justify-center space-x-4">
+                            <a href="https://github.com/Rover1218/weather-app" target="_blank"
+                                class="transform hover:scale-105 transition-transform duration-200 inline-flex items-center px-4 py-2 bg-gray-900 text-white rounded-lg">
+                                <i class="fab fa-github mr-2"></i>GitHub
+                            </a>
+                            <a href="https://weather-app-omega-ashy-51.vercel.app/" target="_blank"
+                                class="transform hover:scale-105 transition-transform duration-200 inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg">
+                                <i class="fas fa-external-link-alt mr-2"></i>Live Demo
+                            </a>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-4 mb-4">
-                        <div class="card h-100 fade-in" data-aos="fade-up">
-                            <div class="card-body text-center">
-                                <img src="./images/1308416.png" alt="Task Management Icon" class="project-icon mb-3"
-                                    style="width: 50px; height: 50px; object-fit: contain;" />
-                                <h5 class="card-title">Cooking Recipe</h5>
-                                <p class="card-text">A web site to check recipies</p>
-                                <div class="mb-3">
-                                    <span class="badge bg-secondary me-1">HTML</span>
-                                    <span class="badge bg-secondary me-1">CSS</span>
-                                    <span class="badge bg-secondary me-1">JavaScript</span>
-                                    <span class="badge bg-secondary me-1">Python</span>
-                                </div>
-                                <a href="https://github.com/Rover1218/cook-recipe" target="_blank"
-                                    rel="noopener noreferrer" class="btn btn-outline-primary me-2">
-                                    <i class="fab fa-github"></i> GitHub
-                                </a>
-                                <a href="https://cook-recipe-dusky.vercel.app/" target="_blank"
-                                    rel="noopener noreferrer" class="btn btn-primary">
-                                    <i class="fas fa-external-link-alt"></i> Live Demo
-                                </a>
-                            </div>
+                </div>
+
+                <!-- Invoice Builder -->
+                <div class="card-hover bg-white rounded-xl shadow-lg overflow-hidden fade-in-up">
+                    <div class="p-6">
+                        <div class="flex justify-center mb-4">
+                            <img src="./images/9813851.png" alt="Invoice Builder"
+                                class="w-16 h-16 object-contain floating">
+                        </div>
+                        <h3 class="text-xl font-semibold text-center mb-3">Invoice Builder</h3>
+                        <p class="text-gray-600 text-center mb-4">A website to build invoice and download it</p>
+
+                        <div class="flex flex-wrap justify-center gap-2 mb-4">
+                            <span class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full">HTML</span>
+                        </div>
+
+                        <div class="flex justify-center space-x-4">
+                            <a href="https://github.com/Rover1218/invoice-builder" target="_blank"
+                                class="transform hover:scale-105 transition-transform duration-200 inline-flex items-center px-4 py-2 bg-gray-900 text-white rounded-lg">
+                                <i class="fab fa-github mr-2"></i>GitHub
+                            </a>
+                            <a href="https://invoice-builder-sigma.vercel.app/" target="_blank"
+                                class="transform hover:scale-105 transition-transform duration-200 inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg">
+                                <i class="fas fa-external-link-alt mr-2"></i>Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portfolio -->
+                <div class="card-hover bg-white rounded-xl shadow-lg overflow-hidden fade-in-up">
+                    <div class="p-6">
+                        <div class="flex justify-center mb-4">
+                            <img src="./images/6361475.png" alt="Portfolio" class="w-16 h-16 object-contain floating">
+                        </div>
+                        <h3 class="text-xl font-semibold text-center mb-3">Portfolio</h3>
+                        <p class="text-gray-600 text-center mb-4">Personal Portfolio</p>
+
+                        <div class="flex flex-wrap justify-center gap-2 mb-4">
+                            <span class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full">HTML</span>
+                            <span class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full">CSS</span>
+                            <span class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full">SCSS</span>
+                            <span class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full">JavaScript</span>
+                        </div>
+
+                        <div class="flex justify-center space-x-4">
+                            <button disabled
+                                class="opacity-50 transform hover:scale-105 transition-transform duration-200 inline-flex items-center px-4 py-2 bg-gray-900 text-white rounded-lg">
+                                <i class="fab fa-github mr-2"></i>Pvt. GitHub
+                            </button>
+                            <a href="https://anindya-portfolio.vercel.app/" target="_blank"
+                                class="transform hover:scale-105 transition-transform duration-200 inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg">
+                                <i class="fas fa-external-link-alt mr-2"></i>Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cooking Recipe -->
+                <div class="card-hover bg-white rounded-xl shadow-lg overflow-hidden fade-in-up">
+                    <div class="p-6">
+                        <div class="flex justify-center mb-4">
+                            <img src="./images/1308416.png" alt="Cooking Recipe"
+                                class="w-16 h-16 object-contain floating">
+                        </div>
+                        <h3 class="text-xl font-semibold text-center mb-3">Cooking Recipe</h3>
+                        <p class="text-gray-600 text-center mb-4">A website to check recipes</p>
+
+                        <div class="flex flex-wrap justify-center gap-2 mb-4">
+                            <span class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full">HTML</span>
+                            <span class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full">CSS</span>
+                            <span class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full">JavaScript</span>
+                            <span class="px-3 py-1 text-sm bg-gray-100 text-gray-800 rounded-full">Python</span>
+                        </div>
+
+                        <div class="flex justify-center space-x-4">
+                            <a href="https://github.com/Rover1218/cook-recipe" target="_blank"
+                                class="transform hover:scale-105 transition-transform duration-200 inline-flex items-center px-4 py-2 bg-gray-900 text-white rounded-lg">
+                                <i class="fab fa-github mr-2"></i>GitHub
+                            </a>
+                            <a href="https://cook-recipe-dusky.vercel.app/" target="_blank"
+                                class="transform hover:scale-105 transition-transform duration-200 inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg">
+                                <i class="fas fa-external-link-alt mr-2"></i>Live Demo
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
+        </main>
+    </div>
 
-    <!-- Bootstrap JS, Popper.js, and jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-
-    <!-- AOS JS for animations -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
-    <!-- Custom JS -->
     <script>
-        $(document).ready(function () {
-            // Hide main content initially
-            $("body").fadeIn(0);
-
-            // Simulate loading
-            setTimeout(function () {
-                // Hide loader
-                $(".loader").fadeOut("slow", function () {
-                    // After loader is hidden, show main content and start animations after 2 seconds
-                    setTimeout(function () {
-                        // Show the body content
-                        $("body").fadeIn("slow");
-                        // Animate header
-                        $("header").css("animation", "fadeIn 1s forwards");
-                        // Animate project cards
-                        $(".card").each(function (index) {
-                            $(this).delay(200 * index).queue(function (next) {
-                                $(this).css("animation", "slideIn 0.5s forwards");
-                                next();
-                            });
-                        });
-                    }, 2000); // Delay of 2 seconds
-                });
-            }, 2000); // Simulate loading for 2 seconds
+        // Loading animation
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.getElementById('loader').style.opacity = '0';
+                document.getElementById('loader').style.transition = 'opacity 0.5s ease-out';
+                setTimeout(() => {
+                    document.getElementById('loader').style.display = 'none';
+                    document.getElementById('content').classList.remove('hidden');
+                    document.getElementById('content').style.opacity = '0';
+                    document.getElementById('content').style.transition = 'opacity 0.5s ease-in';
+                    setTimeout(() => {
+                        document.getElementById('content').style.opacity = '1';
+                        initializeAnimations();
+                    }, 50);
+                }, 500);
+            }, 1500);
         });
 
-        // Initialize AOS (Animate on Scroll)
-        AOS.init();
+        // Intersection Observer for fade-in-up animation
+        function initializeAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '50px'
+            });
+
+            document.querySelectorAll('.fade-in-up').forEach((element) => {
+                observer.observe(element);
+            });
+        }
+
+        // Smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add hover effect to cards
+        document.querySelectorAll('.card-hover').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                card.style.setProperty('--x', `${x}px`);
+                card.style.setProperty('--y', `${y}px`);
+            });
+        });
     </script>
 </body>
 
